@@ -20,48 +20,35 @@
         body {
             background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
             color: var(--text-main);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            overflow-x: hidden;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 20px; overflow-x: hidden;
         }
         .platform-wrapper { width: 100%; max-width: 480px; position: relative; }
         .main-card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 32px;
-            padding: 30px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            position: relative;
-            z-index: 2;
+            background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border); border-radius: 32px;
+            padding: 30px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            position: relative; z-index: 2;
         }
         .header { text-align: center; margin-bottom: 30px; }
         .logo-box {
-            width: 65px; height: 65px;
-            background: linear-gradient(135deg, var(--primary), #a855f7);
-            border-radius: 20px;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 15px; font-size: 30px;
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+            width: 65px; height: 65px; background: linear-gradient(135deg, var(--primary), #a855f7);
+            border-radius: 20px; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 15px; font-size: 30px; box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
         }
         .header h1 { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin-bottom: 5px; }
         .live-status {
             display: inline-flex; align-items: center; gap: 8px;
             background: rgba(16, 185, 129, 0.1); color: var(--accent);
-            padding: 6px 14px; border-radius: 50px;
-            font-size: 11px; font-weight: 700; text-transform: uppercase;
+            padding: 6px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase;
         }
         .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 1.5s infinite; }
-
+        
         /* Service Cards */
         .service-selection { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
         .s-card {
             background: var(--glass); border: 1px solid var(--glass-border);
-            padding: 18px 10px; border-radius: 20px; text-align: center;
-            cursor: pointer; transition: 0.3s;
+            padding: 18px 10px; border-radius: 20px; text-align: center; cursor: pointer; transition: 0.3s;
         }
         .s-card.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); transform: translateY(-4px); }
         .s-card i { font-size: 20px; margin-bottom: 8px; display: block; }
@@ -77,19 +64,42 @@
         .input-group input:focus { border-color: var(--primary); }
         .presets { display: flex; gap: 8px; margin-top: 10px; }
         .p-btn { 
-            flex: 1; padding: 8px; background: var(--glass); border: 1px solid var(--glass-border); 
-            border-radius: 10px; color: var(--text-dim); font-size: 11px; font-weight: 700; cursor: pointer; text-align: center;
+             flex: 1; padding: 8px; background: var(--glass); border: 1px solid var(--glass-border); 
+             border-radius: 10px; color: var(--text-dim); font-size: 11px; font-weight: 700; cursor: pointer; text-align: center;
         }
         .p-btn:hover { border-color: var(--primary); color: white; }
 
         /* Pricing Display */
         .price-engine {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border: 1px solid var(--glass-border);
+            background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid var(--glass-border);
             border-radius: 24px; padding: 25px; text-align: center; margin-bottom: 25px;
         }
         .price-engine .val { font-size: 44px; font-weight: 800; color: #fff; }
         .discount-badge { background: var(--accent); color: white; padding: 4px 10px; border-radius: 6px; font-size: 11px; margin-top: 10px; display: inline-block; }
+
+        /* Viral Loop Freebie Box */
+        .freebie-box {
+            background: linear-gradient(135deg, #10b981, #059669); border-radius: 20px;
+            padding: 20px; text-align: center; margin-bottom: 25px; position: relative;
+            overflow: hidden; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+        }
+        .freebie-box h3 { color: white; font-size: 16px; margin-bottom: 8px; font-weight: 800; }
+        .freebie-box p { color: rgba(255,255,255,0.9); font-size: 11px; margin-bottom: 15px; line-height: 1.4; }
+        .share-btn {
+            background: white; color: #059669; border: none; padding: 12px 20px;
+            border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer;
+            width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s;
+        }
+        .share-btn:hover { transform: scale(1.02); }
+        .claim-step { 
+            display: none; margin-top: 15px; padding-top: 15px; 
+            border-top: 1px dashed rgba(255,255,255,0.4); animation: fadeIn 0.5s ease-in;
+        }
+        .claim-btn {
+            background: #0f172a; color: white; border: none; padding: 12px;
+            border-radius: 12px; font-weight: 800; font-size: 12px; cursor: pointer;
+            width: 100%; margin-top: 10px; display: block; text-decoration: none;
+        }
 
         /* Buttons */
         .cta-btn {
@@ -98,8 +108,7 @@
             display: flex; align-items: center; justify-content: center; gap: 12px; transition: 0.3s;
         }
         .btn-wa { background: #25D366; color: white; margin-bottom: 12px; text-decoration: none; }
-        .btn-wa:hover { transform: scale(1.02); filter: brightness(1.1); }
-        
+        .btn-wa:hover { transform: scale(1.02); filter: brightness(1.1); }        
         .guarantee-row { display: flex; justify-content: center; gap: 15px; margin-top: 15px; font-size: 10px; color: var(--text-dim); }
 
         /* Notification Toast */
@@ -112,6 +121,7 @@
         }
 
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -144,7 +154,7 @@
         </div>
 
         <div class="input-group">
-            <label>CHOOSE QUANTITY</label>
+            <label>CHOOSE QUANTITY (MIN 100)</label>
             <input type="number" id="qtyInput" placeholder="Enter amount" oninput="runEngine()">
             <div class="presets">
                 <div class="p-btn" onclick="setQty(1000)">1,000</div>
@@ -155,7 +165,7 @@
 
         <div class="input-group">
             <label>PROMO CODE</label>
-            <input type="text" id="promoInput" placeholder="Optional" oninput="runEngine()">
+            <input type="text" id="promoInput" placeholder="Optional" style="padding-right: 80px;" oninput="runEngine()">
             <div id="promoStatus" style="position:absolute; right:15px; top:38px; font-size:10px; font-weight:800;"></div>
         </div>
 
@@ -163,6 +173,22 @@
             <div class="label" style="font-size:11px; opacity:0.6;">FINAL INVESTMENT</div>
             <div class="val" id="totalPriceDisplay">₹0.00</div>
             <div id="discountTag" style="display:none;"><span class="discount-badge">Affiliate Discount Applied</span></div>
+        </div>
+
+        <div class="freebie-box">
+            <h3>🎁 Claim 200 Free Followers</h3>
+            <p>Want to test our speed? Share this site with 5 friends or a group chat on WhatsApp to unlock 200 free followers instantly!</p>
+            
+            <button class="share-btn" onclick="shareToUnlock()">
+                <i class="fab fa-whatsapp" style="font-size: 18px;"></i> SHARE TO UNLOCK
+            </button>
+
+            <div class="claim-step" id="claimStep">
+                <p>✅ <strong>Step 1 Complete!</strong><br>Now, send a screenshot of your shares to our admin to claim your followers.</p>
+                <a href="#" class="claim-btn" onclick="claimFreebie(event)">
+                    <i class="fas fa-camera"></i> SEND SCREENSHOT TO ADMIN
+                </a>
+            </div>
         </div>
 
         <button class="cta-btn btn-wa" onclick="triggerWhatsApp()">
@@ -185,6 +211,29 @@
         AFFILIATES: { "AK15": 15, "GBI10": 10, "AMAN15": 15, "TEST": 50 }
     };
 
+    // --- Viral Loop / Freebie Functions ---
+    function shareToUnlock() {
+        // REPLACE THIS URL WITH YOUR ACTUAL WEBSITE LINK
+        const viralMessage = encodeURIComponent("I just found this secret site to boost Instagram followers and likes! 🚀 Check out GrowbrandIndia: https://yourwebsite.com");
+        
+        window.open(`https://wa.me/?text=${viralMessage}`, '_blank');
+        
+        setTimeout(() => {
+            document.getElementById('claimStep').style.display = 'block';
+            const shareBtn = document.querySelector('.share-btn');
+            shareBtn.style.opacity = '0.7';
+            shareBtn.innerHTML = '<i class="fas fa-check"></i> SHARED';
+            shareBtn.onclick = null; 
+        }, 3000); 
+    }
+
+    function claimFreebie(e) {
+        e.preventDefault();
+        const claimText = encodeURIComponent("🎁 Hi Admin! I just shared GrowbrandIndia. Here is my screenshot and my IG Profile link for the 200 Free Followers: [PASTE LINK HERE]");
+        window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${claimText}`, '_blank');
+    }
+    // ---------------------------------------
+
     function setQty(val) { 
         document.getElementById('qtyInput').value = val; 
         runEngine(); 
@@ -201,27 +250,31 @@
     function runEngine() {
         const qty = parseFloat(document.getElementById('qtyInput').value) || 0;
         const promo = document.getElementById('promoInput').value.toUpperCase().trim();
+        const statusBox = document.getElementById('promoStatus');
         
-        // Correct Calculation based on Price per 1,000 units
         let originalPrice = (qty / 1000) * CONFIG.ACTIVE_RATE;
         let finalPrice = originalPrice;
         let disc = 0;
 
-        // Apply Promo Logic
-        if(CONFIG.AFFILIATES[promo]) {
-            disc = CONFIG.AFFILIATES[promo];
-            finalPrice = originalPrice * (1 - (disc/100));
-            document.getElementById('promoStatus').innerText = "✓ APPLIED";
-            document.getElementById('promoStatus').style.color = "#10b981";
-            document.getElementById('discountTag').style.display = "block";
+        // Smoother Promo Logic: Only show error if they actually typed something
+        if (promo.length > 0) {
+            if(CONFIG.AFFILIATES[promo]) {
+                disc = CONFIG.AFFILIATES[promo];
+                finalPrice = originalPrice * (1 - (disc/100));
+                statusBox.innerText = "✓ APPLIED";
+                statusBox.style.color = "#10b981";
+                document.getElementById('discountTag').style.display = "block";
+            } else {
+                statusBox.innerText = "× INVALID";
+                statusBox.style.color = "#ef4444";
+                document.getElementById('discountTag').style.display = "none";
+            }
         } else {
-            document.getElementById('promoStatus').innerText = promo ? "× INVALID" : "";
-            document.getElementById('promoStatus').style.color = "#ef4444";
+            statusBox.innerText = "";
             document.getElementById('discountTag').style.display = "none";
         }
 
-        // Display update with Indian Rupee formatting
-        if (disc > 0) {
+        if (disc > 0 && qty > 0) {
             document.getElementById('totalPriceDisplay').innerHTML = 
             `<span style="text-decoration:line-through; font-size:18px; opacity:0.3; margin-right:10px;">₹${originalPrice.toFixed(0)}</span>₹${finalPrice.toFixed(2)}`;
         } else {
@@ -237,8 +290,9 @@
     }
 
     function triggerWhatsApp() {
-        if(!window.order || window.order.qty <= 0) {
-            alert("Please enter a valid quantity first!");
+        // Enforce a minimum order of 100
+        if(!window.order || window.order.qty < 100) {
+            alert("Please enter a valid quantity! Minimum order is 100.");
             return;
         }
         const text = `🚀 *NEW ORDER*%0A📦 *Service:* ${window.order.service}%0A🔢 *Qty:* ${window.order.qty}%0A💰 *Price:* ₹${window.order.price}%0A🎫 *Promo:* ${window.order.promo}`;
@@ -248,7 +302,7 @@
     // Live Notification System
     const locations = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata", "Pune", "Hyderabad", "Ahmedabad"];
     const orderTypes = ["1k Followers", "5k Views", "500 Likes", "10k Followers", "2k Likes"];
-        
+    
     function showNotification() {
         const loc = locations[Math.floor(Math.random()*locations.length)];
         const ord = orderTypes[Math.floor(Math.random()*orderTypes.length)];
@@ -258,13 +312,10 @@
         setTimeout(() => { toast.style.transform = "translateY(150%)"; }, 4000);
     }
     
-    // Launch notifications
     setInterval(showNotification, 12000);
     setTimeout(showNotification, 3000);
 
-    // Initial calculation run
     runEngine();
 </script>
-
 </body>
 </html>
