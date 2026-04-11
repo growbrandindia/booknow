@@ -15,6 +15,7 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
             --text-dim: #94a3b8;
+            --error: #ef4444;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body {
@@ -24,13 +25,20 @@
             min-height: 100vh; padding: 20px; overflow-x: hidden;
         }
         .platform-wrapper { width: 100%; max-width: 480px; position: relative; }
+        
+        /* Trust Badge */
+        .trust-badge {
+            text-align: center; font-size: 12px; font-weight: 700; color: #fbbf24;
+            margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase;
+        }
+        
         .main-card {
             background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border); border-radius: 32px;
             padding: 30px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
             position: relative; z-index: 2;
         }
-        .header { text-align: center; margin-bottom: 30px; }
+        .header { text-align: center; margin-bottom: 25px; }
         .logo-box {
             width: 65px; height: 65px; background: linear-gradient(135deg, var(--primary), #a855f7);
             border-radius: 20px; display: flex; align-items: center; justify-content: center;
@@ -42,10 +50,10 @@
             background: rgba(16, 185, 129, 0.1); color: var(--accent);
             padding: 6px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase;
         }
-        .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 1.5s infinite; }
+        .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: blink 1.5s infinite; }
         
         /* Service Cards */
-        .service-selection { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
+        .service-selection { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
         .s-card {
             background: var(--glass); border: 1px solid var(--glass-border);
             padding: 18px 10px; border-radius: 20px; text-align: center; cursor: pointer; transition: 0.3s;
@@ -56,26 +64,34 @@
 
         /* Inputs & Presets */
         .input-group { margin-bottom: 20px; position: relative; }
-        .input-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-dim); margin: 0 0 8px 5px; letter-spacing: 1px; }
+        .input-group label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: var(--text-dim); margin: 0 0 8px 5px; letter-spacing: 1px; }
         .input-group input {
             width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
-            padding: 16px 20px; border-radius: 18px; color: white; font-size: 18px; font-weight: 700; outline: none;
+            padding: 16px 20px; border-radius: 18px; color: white; font-size: 16px; font-weight: 600; outline: none; transition: 0.3s;
         }
-        .input-group input:focus { border-color: var(--primary); }
+        .input-group input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(99,102,241,0.2); }
+        .input-error { border-color: var(--error) !important; animation: shake 0.4s; }
+        
         .presets { display: flex; gap: 8px; margin-top: 10px; }
         .p-btn { 
              flex: 1; padding: 8px; background: var(--glass); border: 1px solid var(--glass-border); 
-             border-radius: 10px; color: var(--text-dim); font-size: 11px; font-weight: 700; cursor: pointer; text-align: center;
+             border-radius: 10px; color: var(--text-dim); font-size: 11px; font-weight: 700; cursor: pointer; text-align: center; transition: 0.2s;
         }
         .p-btn:hover { border-color: var(--primary); color: white; }
+        
+        .timer-text { color: #f43f5e; font-weight: 800; animation: blink 2s infinite; }
 
         /* Pricing Display */
         .price-engine {
             background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid var(--glass-border);
-            border-radius: 24px; padding: 25px; text-align: center; margin-bottom: 25px;
+            border-radius: 24px; padding: 25px; text-align: center; margin-bottom: 25px; position: relative; overflow: hidden;
         }
-        .price-engine .val { font-size: 44px; font-weight: 800; color: #fff; }
-        .discount-badge { background: var(--accent); color: white; padding: 4px 10px; border-radius: 6px; font-size: 11px; margin-top: 10px; display: inline-block; }
+        .price-engine::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 60%); pointer-events: none;
+        }
+        .price-engine .val { font-size: 44px; font-weight: 800; color: #fff; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .discount-badge { background: var(--accent); color: white; padding: 4px 10px; border-radius: 6px; font-size: 11px; margin-top: 10px; display: inline-block; font-weight: 700;}
 
         /* Viral Loop Freebie Box */
         .freebie-box {
@@ -90,7 +106,7 @@
             border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer;
             width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s;
         }
-        .share-btn:hover { transform: scale(1.02); }
+        .share-btn:hover { transform: scale(1.02); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .claim-step { 
             display: none; margin-top: 15px; padding-top: 15px; 
             border-top: 1px dashed rgba(255,255,255,0.4); animation: fadeIn 0.5s ease-in;
@@ -107,21 +123,27 @@
             font-size: 16px; font-weight: 800; cursor: pointer;
             display: flex; align-items: center; justify-content: center; gap: 12px; transition: 0.3s;
         }
-        .btn-wa { background: #25D366; color: white; margin-bottom: 12px; text-decoration: none; }
-        .btn-wa:hover { transform: scale(1.02); filter: brightness(1.1); }        
-        .guarantee-row { display: flex; justify-content: center; gap: 15px; margin-top: 15px; font-size: 10px; color: var(--text-dim); }
+        .btn-wa { 
+            background: linear-gradient(135deg, #25D366, #128C7E); color: white; margin-bottom: 12px; 
+            text-decoration: none; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            animation: pulse-btn 2s infinite;
+        }
+        .btn-wa:hover { transform: translateY(-3px); filter: brightness(1.1); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.5); }        
+        .guarantee-row { display: flex; justify-content: center; gap: 15px; margin-top: 15px; font-size: 11px; color: var(--text-dim); font-weight: 600; }
 
         /* Notification Toast */
         #notification-toast {
             position: fixed; bottom: 20px; left: 20px;
-            background: white; color: #333; padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); color: #0f172a; padding: 12px 20px;
             border-radius: 15px; display: flex; align-items: center; gap: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            transform: translateY(150%); transition: 0.5s; z-index: 999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateY(150%); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 999;
         }
 
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse-btn { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
     </style>
 </head>
 <body>
@@ -130,15 +152,19 @@
     <div style="background: #e0e7ff; width:35px; height:35px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
         <i class="fab fa-instagram" style="color: var(--primary);"></i>
     </div>
-    <div id="toast-text" style="font-size: 12px; font-weight: 600;">Someone just ordered 5k Followers!</div>
+    <div id="toast-text" style="font-size: 12px; font-weight: 700;">Someone just ordered 5k Followers!</div>
 </div>
 
 <div class="platform-wrapper">
+    <div class="trust-badge">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 
+        Trusted by 12,500+ Users
+    </div>
     <div class="main-card">
         <header class="header">
             <div class="logo-box"><i class="fas fa-rocket"></i></div>
             <h1>GrowbrandIndia</h1>
-            <div class="live-status"><span class="dot"></span> 24 Orders in last 1 hour</div>
+            <div class="live-status"><span class="dot"></span> <span id="orderCount">24</span> Orders in last hour</div>
         </header>
 
         <div class="service-selection">
@@ -154,8 +180,13 @@
         </div>
 
         <div class="input-group">
+            <label>INSTAGRAM LINK / USERNAME</label>
+            <input type="text" id="targetInput" placeholder="@username or Post URL" oninput="removeError(this)">
+        </div>
+
+        <div class="input-group">
             <label>CHOOSE QUANTITY (MIN 100)</label>
-            <input type="number" id="qtyInput" placeholder="Enter amount" oninput="runEngine()">
+            <input type="number" id="qtyInput" placeholder="Enter amount" oninput="runEngine(); removeError(this)">
             <div class="presets">
                 <div class="p-btn" onclick="setQty(1000)">1,000</div>
                 <div class="p-btn" onclick="setQty(5000)">5,000</div>
@@ -164,27 +195,27 @@
         </div>
 
         <div class="input-group">
-            <label>PROMO CODE</label>
-            <input type="text" id="promoInput" placeholder="Optional" style="padding-right: 80px;" oninput="runEngine()">
+            <label>PROMO CODE <span class="timer-text">SALE ENDS: <span id="timer">14:59</span></span></label>
+            <input type="text" id="promoInput" placeholder="Optional" oninput="runEngine()">
             <div id="promoStatus" style="position:absolute; right:15px; top:38px; font-size:10px; font-weight:800;"></div>
         </div>
 
         <div class="price-engine">
-            <div class="label" style="font-size:11px; opacity:0.6;">FINAL INVESTMENT</div>
+            <div class="label" style="font-size:11px; opacity:0.6; font-weight:700; letter-spacing:1px;">FINAL INVESTMENT</div>
             <div class="val" id="totalPriceDisplay">₹0.00</div>
-            <div id="discountTag" style="display:none;"><span class="discount-badge">Affiliate Discount Applied</span></div>
+            <div id="discountTag" style="display:none;"><span class="discount-badge"><i class="fas fa-tag"></i> Discount Applied</span></div>
         </div>
 
         <div class="freebie-box">
-            <h3>🎁 Claim 200 Free Followers</h3>
-            <p>Want to test our speed? Share this site with 5 friends or a group chat on WhatsApp to unlock 200 free followers instantly!</p>
+            <h3>🎁 Claim 200 Free Reel Views</h3>
+            <p>Want to test our speed? Share this site with 5 friends or a group chat on WhatsApp to unlock 200 free views instantly!</p>
             
             <button class="share-btn" onclick="shareToUnlock()">
                 <i class="fab fa-whatsapp" style="font-size: 18px;"></i> SHARE TO UNLOCK
             </button>
 
             <div class="claim-step" id="claimStep">
-                <p>✅ <strong>Step 1 Complete!</strong><br>Now, send a screenshot of your shares to our admin to claim your followers.</p>
+                <p>✅ <strong>Step 1 Complete!</strong><br>Now, send a screenshot of your shares to our admin to claim your views.</p>
                 <a href="#" class="claim-btn" onclick="claimFreebie(event)">
                     <i class="fas fa-camera"></i> SEND SCREENSHOT TO ADMIN
                 </a>
@@ -192,13 +223,13 @@
         </div>
 
         <button class="cta-btn btn-wa" onclick="triggerWhatsApp()">
-            <i class="fab fa-whatsapp"></i> START ORDER NOW
+            <i class="fab fa-whatsapp" style="font-size: 20px;"></i> COMPLETE SECURE ORDER
         </button>
 
         <div class="guarantee-row">
             <span><i class="fas fa-shield-alt" style="color:var(--accent)"></i> Non-Drop</span>
             <span><i class="fas fa-bolt" style="color:#fbbf24"></i> Instant Start</span>
-            <span><i class="fas fa-lock"></i> No Password</span>
+            <span><i class="fas fa-lock"></i> No Password Required</span>
         </div>
     </div>
 </div>
@@ -211,33 +242,43 @@
         AFFILIATES: { "AK15": 15, "GBI10": 10, "AMAN15": 15, "TEST": 50 }
     };
 
+    // --- Scarcity Timer ---
+    let timeLeft = 899; // 14 mins 59 secs
+    setInterval(() => {
+        let m = Math.floor(timeLeft / 60);
+        let s = timeLeft % 60;
+        document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+        if(timeLeft > 0) timeLeft--;
+    }, 1000);
+
     // --- Viral Loop / Freebie Functions ---
     function shareToUnlock() {
-        // REPLACE THIS URL WITH YOUR ACTUAL WEBSITE LINK
-        const viralMessage = encodeURIComponent("I just found this secret site to boost Instagram followers and likes! 🚀 Check out GrowbrandIndia: https://growbrandindia.github.io/booknow");
-        
+        const viralMessage = encodeURIComponent("I just found this secret site to boost Instagram Reel views and followers! 🚀 Check out GrowbrandIndia: https://growbrandindia.github.io/booknow");
         window.open(`https://wa.me/?text=${viralMessage}`, '_blank');
         
         setTimeout(() => {
             document.getElementById('claimStep').style.display = 'block';
             const shareBtn = document.querySelector('.share-btn');
             shareBtn.style.opacity = '0.7';
-            shareBtn.innerHTML = '<i class="fas fa-check"></i> SHARED';
+            shareBtn.innerHTML = '<i class="fas fa-check"></i> SHARED VIRALLY';
             shareBtn.onclick = null; 
         }, 3000); 
     }
 
     function claimFreebie(e) {
         e.preventDefault();
-        const claimText = encodeURIComponent("🎁 Hi Admin! I just shared GrowbrandIndia. Here is my screenshot and my IG Profile link for the 200 Free Followers: [PASTE LINK HERE]");
+        const claimText = encodeURIComponent("🎁 Hi Admin! I just shared GrowbrandIndia. Here is my screenshot and my Reel link for the 200 Free Views: [PASTE LINK HERE]");
         window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${claimText}`, '_blank');
     }
-    // ---------------------------------------
 
+    // --- UI Interactions ---
     function setQty(val) { 
         document.getElementById('qtyInput').value = val; 
+        removeError(document.getElementById('qtyInput'));
         runEngine(); 
     }
+
+    function removeError(el) { el.classList.remove('input-error'); }
 
     function updateService(type, rate, element) {
         CONFIG.ACTIVE_RATE = rate;
@@ -250,27 +291,20 @@
     function runEngine() {
         const qty = parseFloat(document.getElementById('qtyInput').value) || 0;
         const promo = document.getElementById('promoInput').value.toUpperCase().trim();
-        const statusBox = document.getElementById('promoStatus');
         
         let originalPrice = (qty / 1000) * CONFIG.ACTIVE_RATE;
         let finalPrice = originalPrice;
         let disc = 0;
 
-        // Smoother Promo Logic: Only show error if they actually typed something
-        if (promo.length > 0) {
-            if(CONFIG.AFFILIATES[promo]) {
-                disc = CONFIG.AFFILIATES[promo];
-                finalPrice = originalPrice * (1 - (disc/100));
-                statusBox.innerText = "✓ APPLIED";
-                statusBox.style.color = "#10b981";
-                document.getElementById('discountTag').style.display = "block";
-            } else {
-                statusBox.innerText = "× INVALID";
-                statusBox.style.color = "#ef4444";
-                document.getElementById('discountTag').style.display = "none";
-            }
+        if(CONFIG.AFFILIATES[promo]) {
+            disc = CONFIG.AFFILIATES[promo];
+            finalPrice = originalPrice * (1 - (disc/100));
+            document.getElementById('promoStatus').innerText = "✓ APPLIED";
+            document.getElementById('promoStatus').style.color = "#10b981";
+            document.getElementById('discountTag').style.display = "block";
         } else {
-            statusBox.innerText = "";
+            document.getElementById('promoStatus').innerText = promo ? "× INVALID" : "";
+            document.getElementById('promoStatus').style.color = "#ef4444";
             document.getElementById('discountTag').style.display = "none";
         }
 
@@ -290,30 +324,47 @@
     }
 
     function triggerWhatsApp() {
-        // Enforce a minimum order of 100
-        if(!window.order || window.order.qty < 100) {
-            alert("Please enter a valid quantity! Minimum order is 100.");
+        const target = document.getElementById('targetInput');
+        const qty = document.getElementById('qtyInput');
+        let hasError = false;
+
+        // Validation
+        if(!target.value.trim()) { target.classList.add('input-error'); hasError = true; }
+        if(!window.order || window.order.qty < 100) { qty.classList.add('input-error'); hasError = true; }
+        
+        if(hasError) {
+            // Optional: Vibrate device on error if supported
+            if(navigator.vibrate) navigator.vibrate(200);
             return;
         }
-        const text = `🚀 *NEW ORDER*%0A📦 *Service:* ${window.order.service}%0A🔢 *Qty:* ${window.order.qty}%0A💰 *Price:* ₹${window.order.price}%0A🎫 *Promo:* ${window.order.promo}`;
+
+        const text = `🚀 *NEW PREMIUM ORDER*%0A%0A🎯 *Target:* ${target.value.trim()}%0A📦 *Service:* ${window.order.service}%0A🔢 *Qty:* ${window.order.qty.toLocaleString()}%0A💰 *Payable:* ₹${window.order.price}%0A🎫 *Promo:* ${window.order.promo}%0A%0A_Please send QR code for payment._`;
         window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${text}`);
     }
 
-    // Live Notification System
-    const locations = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata", "Pune", "Hyderabad", "Ahmedabad"];
-    const orderTypes = ["1k Followers", "5k Views", "500 Likes", "10k Followers", "2k Likes"];
-    
+    // Live Notification System - Enhanced with counter increment
+    const locations = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata", "Pune", "Hyderabad", "Ahmedabad", "Jaipur", "Surat"];
+    const orderTypes = ["1k Followers", "5k Views", "500 Likes", "10k Followers", "2k Likes", "50k Views"];
+    let currentOrders = 24;
+
     function showNotification() {
         const loc = locations[Math.floor(Math.random()*locations.length)];
         const ord = orderTypes[Math.floor(Math.random()*orderTypes.length)];
         document.getElementById('toast-text').innerText = `Someone from ${loc} just ordered ${ord}!`;
         const toast = document.getElementById('notification-toast');
         toast.style.transform = "translateY(0)";
-        setTimeout(() => { toast.style.transform = "translateY(150%)"; }, 4000);
+        
+        // Slightly increment the "Live Orders" counter for extra FOMO
+        if(Math.random() > 0.5) {
+            currentOrders++;
+            document.getElementById('orderCount').innerText = currentOrders;
+        }
+
+        setTimeout(() => { toast.style.transform = "translateY(150%)"; }, 4500);
     }
     
-    setInterval(showNotification, 12000);
-    setTimeout(showNotification, 3000);
+    setInterval(showNotification, 14000);
+    setTimeout(showNotification, 4000);
 
     runEngine();
 </script>
